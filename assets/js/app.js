@@ -17,6 +17,10 @@ const showFormBtn = document.getElementById('show-form-btn');
 const trackForm = document.getElementById('track-form');
 const searchInput = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-btn');
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const screenToggle = document.getElementById('screen-toggle');
+const playerBar = document.querySelector('.player-bar');
+const appShell = document.querySelector('.app-shell');
 const likedSongsEl = document.getElementById('liked-songs');
 const queueListEl = document.getElementById('queue-list');
 const youtubeResultsEl = document.getElementById('youtube-results');
@@ -293,6 +297,28 @@ async function loadPlaylist() {
     playlistEl.innerHTML = '<p style="padding: 20px; color: #ff9a9a;">Unable to load playlist.</p>';
   }
 }
+
+sidebarToggle.addEventListener('click', () => {
+  appShell.classList.toggle('sidebar-collapsed');
+  const isCollapsed = appShell.classList.contains('sidebar-collapsed');
+  sidebarToggle.textContent = isCollapsed ? '›' : '‹';
+  sidebarToggle.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+});
+
+function toggleScreenVisibility() {
+  const isHidden = document.body.classList.toggle('screen-hidden');
+  screenToggle.textContent = isHidden ? '◉' : '✕';
+  screenToggle.setAttribute('aria-label', isHidden ? 'Open screen' : 'Close screen');
+  screenToggle.title = isHidden ? 'Open screen' : 'Close screen';
+}
+
+screenToggle.addEventListener('click', toggleScreenVisibility);
+
+playerBar.addEventListener('click', (event) => {
+  if (!document.body.classList.contains('screen-hidden')) return;
+  if (event.target.closest('.screen-toggle')) return;
+  toggleScreenVisibility();
+});
 
 showFormBtn.addEventListener('click', () => {
   trackForm.classList.toggle('hidden');

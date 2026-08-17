@@ -59,6 +59,8 @@
       <main class="main-panel">
         <header class="topbar">
           <div class="nav-arrows">
+            <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Collapse sidebar" type="button">‹</button>
+            <button id="screen-toggle" class="screen-toggle" aria-label="Close screen" type="button">✕</button>
             <button aria-label="Back">‹</button>
             <button aria-label="Forward">›</button>
           </div>
